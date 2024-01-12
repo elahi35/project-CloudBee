@@ -1,0 +1,23 @@
+syntax = "proto3";
+
+message User {
+  string first_name = 1;
+  string last_name = 2;
+  string email = 3;
+}
+
+message Ticket {
+  string from = 1;
+  string to = 2;
+  User user = 3;
+  float price = 4;
+  string section = 5;
+}
+
+service TrainTicketService {
+  rpc PurchaseTicket(Ticket) returns (Ticket);
+  rpc ViewReceipt(User) returns (Ticket);
+  rpc ViewSeatAllocation(string) returns (map<string, User>);
+  rpc RemoveUser(User) returns (bool);
+  rpc ModifySeat(User) returns (Ticket);
+}
